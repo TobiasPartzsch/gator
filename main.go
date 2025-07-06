@@ -33,6 +33,7 @@ func main() {
 	cmds.register("users", handlerGetUsers)
 	cmds.register("agg", handlerAgg)
 	cmds.register("addfeed", handlerAddfeed)
+	cmds.register("feeds", handlerListFeeds)
 
 	if len(os.Args) < 2 {
 		fmt.Fprintln(os.Stderr, "need at least one argument as the command name")
