@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/bootdotdev/gator/internal/database"
+	"github.com/tobiaspartzsch/gator/internal/database"
 )
 
 func handlerBrowse(s *state, cmd command, user database.User) error {
@@ -32,7 +32,11 @@ func handlerBrowse(s *state, cmd command, user database.User) error {
 
 	fmt.Printf("Found %d posts for user %s:\n", len(posts), user.Name)
 	for _, post := range posts {
-		fmt.Printf("%s from %s\n", post.PublishedAt.Format("Mon Jan 2"), post.FeedName)
+		if post.PublishedAt.Valid {
+			fmt.Printf("Published: %s\n", post.PublishedAt.Time.Format("2006-01-02 15:04:05"))
+		} else {
+			fmt.Printf("Published: unknown\n")
+		}
 		fmt.Printf("--- %s ---\n", post.Title)
 		fmt.Printf("    %v\n", post.Description.String)
 		fmt.Printf("Link: %s\n", post.Url)
