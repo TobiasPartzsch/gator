@@ -38,7 +38,11 @@ func handlerBrowse(s *state, cmd command, user database.User) error {
 			fmt.Printf("Published: unknown\n")
 		}
 		fmt.Printf("--- %s ---\n", post.Title)
-		fmt.Printf("    %v\n", post.Description.String)
+		if post.Description.Valid {
+			fmt.Printf("    %v\n", post.Description.String)
+		} else {
+			fmt.Printf("    No description available\n")
+		}
 		fmt.Printf("Link: %s\n", post.Url)
 		fmt.Println("=====================================")
 	}
